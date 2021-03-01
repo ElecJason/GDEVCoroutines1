@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadeCor : MonoBehaviour
+public class EaseOutColor : MonoBehaviour
 {
     [SerializeField] private Renderer rend;
-    [SerializeField] private float WaitTime = 1.0f;
-    [SerializeField] private float fadeSpeed = 0.1f;
+    [SerializeField] private float fadeSpeed = 10f;
     // Update is called once per frame
-
 
     private void Start()
     {
-        StartCoroutine(Fade());
+        StartCoroutine(FadeOut());
     }
 
-    IEnumerator Fade()
+    IEnumerator FadeOut()
     {
-        for (float ft = 0f; ft >= 1; ft += fadeSpeed)
+        float t = 0;
+        while (t <= 1.0f)
         {
+            t += Time.deltaTime / fadeSpeed;
+            float easeStep = t / t / t / t / t;
             Color c = rend.material.color;
-            c.a = ft;
+            c.a = t;
             rend.material.color = c;
             yield return null;
         }
