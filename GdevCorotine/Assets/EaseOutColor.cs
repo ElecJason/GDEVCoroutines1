@@ -21,7 +21,7 @@ public class EaseOutColor : MonoBehaviour
             t += Time.deltaTime / fadeSpeed;
             float easeStep = t / t / t / t / t;
             Color c = rend.material.color;
-            c.a = t;
+            c.a = easeStep;
             rend.material.color = c;
             yield return null;
         }
